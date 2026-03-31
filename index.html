@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
+    /* All existing styles (unchanged) plus showcase additions at the bottom */
     * {
       margin: 0;
       padding: 0;
@@ -143,7 +144,6 @@
       }
     }
 
-    /* Keep rest of CSS exactly as before – all unchanged */
     body::before {
       content: "";
       position: fixed;
@@ -732,6 +732,68 @@
       opacity: 0.5;
     }
 
+    /* Showcase Section Styles*/
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .code-panel, .demo-panel {
+      background: var(--bg-terminal);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .code-content, .demo-content {
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      overflow-x: auto;
+      min-height: 400px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .code-content pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .code-content code {
+      color: var(--text-primary);
+    }
+    .demo-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .demo-line {
+      margin: 0.2rem 0;
+      white-space: pre-wrap;
+      font-family: 'Fira Code', monospace;
+      color: var(--text-secondary);
+    }
+    .demo-line .prompt {
+      color: var(--accent);
+    }
+    @keyframes blinkCursor {
+      50% { border-color: transparent; }
+    }
+    .typing-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1rem;
+      background: var(--accent);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: blinkCursor 1s step-end infinite;
+    }
+    .code-tag { color: #ff79c6; }
+    .code-attr { color: #50fa7b; }
+    .code-eq { color: #f1fa8c; }
+    .code-value { color: #bd93f9; }
+
     @media (max-width: 780px) {
       .contact-grid {
         grid-template-columns: 1fr;
@@ -745,6 +807,9 @@
       .modal-close {
         top: -30px;
         right: -30px;
+      }
+      .showcase-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -761,9 +826,10 @@
       <a href="#about">~about</a>
       <a href="#projects">~projects</a>
       <a href="#skills">~skills</a>
+      <a href="#showcase">~showcase</a>
       <a href="#contact">~contact</a>
       <a href="#terminal">~shell</a>
-      <button class="theme-toggle" id="themeToggle"><i class="fas fa-terminal"></i> $ dark</button>
+      <button class="theme-toggle" id="themeToggle"><i class="fas fa-terminal"></i> $ matrix</button>
       <!-- Replace with your actual profile image URL -->
       <img id="profileImg" class="profile-pic" src="profile.jpg" alt="Taze Russell">
     </div>
@@ -797,13 +863,13 @@
           <span style="color: var(--accent);">~/portfolio</span>
           <span>$ whoami</span>
         </div>
-        <div class="terminal-line">> Russell — Developer , Data Analyst & Statistician</div>
+        <div class="terminal-line">> Russell — Developer, Data Analyst & Statistician</div>
         <div class="cmd-line" style="margin-top: 0.8rem;">
           <span class="prompt">➜</span>
           <span style="color: var(--accent);">~/portfolio</span>
           <span>$ cat about.txt</span>
         </div>
-        <div class="terminal-line">> carfting everyday solutions to curb modern day problems.</div>
+        <div class="terminal-line">> crafting everyday solutions to curb modern day problems.</div>
         <div class="terminal-line">> currently crafting: <span style="color: var(--accent);">Web Apps</span> · <span style="color: var(--accent);">Websites</span> · OSS tools</div>
         <div class="cmd-line" style="margin-top: 1rem;">
           <span class="prompt">➜</span>
@@ -826,7 +892,7 @@
       <h2 class="section-title"><i class="fas fa-user-astronaut"></i> about</h2>
       <div class="about-card">
         <p><span class="command-highlight">>_ </span>russell@dev:~$ <span style="color: var(--accent);">cat README.md</span></p>
-        <p>I'm Russell, a Statistics and Programming student in Kenyatta University. Over the last 2 years, I've done couple projects incuding web apps(eCommmerce), Inventory management systems, Shell/Terminal, etc. I value clean abstractions, type safety, and the joy of a perfectly executed animation.</p>
+        <p>I'm Russell, a Statistics and Programming student in Kenyatta University. Over the last 2 years, I've done couple projects including web apps (eCommerce), Inventory management systems, Shell/Terminal, etc. I value clean abstractions, type safety, and the joy of a perfectly executed animation.</p>
         <p><span class="command-highlight">>_ </span>currently diving into: <span style="color: var(--accent);">Rust</span> · <span style="color: var(--accent);">Springboot</span> · <span style="color: var(--accent);">Django</span> · <span style="color: var(--accent);">Mongodb</span></p>
         <p><span class="command-highlight">>_ </span>philosophy: "make it clean, make it work, make it fast — in that order but with obsession."</p>
       </div>
@@ -845,7 +911,7 @@
     </div>
   </section>
 
-  <!-- Skills Section - Updated with new skill set -->
+  <!-- Skills Section -->
   <section id="skills">
     <div class="container">
       <h2 class="section-title"><i class="fas fa-microchip"></i> tech stack</h2>
@@ -860,6 +926,41 @@
         <div class="skill-badge"><i class="fab fa-git-alt"></i> Git/GitHub Actions</div>
         <div class="skill-badge"><i class="fab fa-python"></i> Python</div>
         <div class="skill-badge"><i class="fab fa-js"></i> JavaScript</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEW: Code & Live Demo Showcase ========== -->
+  <section id="showcase">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-code"></i> code & live demo</h2>
+      <div class="showcase-grid">
+        <!-- LEFT: Code Snippet -->
+        <div class="code-panel">
+          <div class="term-header-bar">
+            <span class="term-title">~/portfolio/index.html</span>
+            <span class="term-controls">
+              <i class="fas fa-circle" style="color: #ff5f56;"></i>
+              <i class="fas fa-circle" style="color: #ffbd2e;"></i>
+              <i class="fas fa-circle" style="color: #27c93f;"></i>
+            </span>
+          </div>
+          <div class="code-content">
+            <pre><code id="code-snippet"></code></pre>
+          </div>
+        </div>
+        <!-- RIGHT: Simulated Live Demo -->
+        <div class="demo-panel">
+          <div class="term-header-bar">
+            <span class="term-title">live preview (simulated)</span>
+            <span class="term-controls">
+              <i class="fas fa-circle" style="color: #ff5f56;"></i>
+              <i class="fas fa-circle" style="color: #ffbd2e;"></i>
+              <i class="fas fa-circle" style="color: #27c93f;"></i>
+            </span>
+          </div>
+          <div class="demo-content" id="demo-output"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -889,7 +990,7 @@
     </div>
   </section>
 
-  <!-- Contact Section with REAL Email via EmailJS -->
+  <!-- Contact Section -->
   <section id="contact">
     <div class="container">
       <h2 class="section-title"><i class="fas fa-envelope"></i> connect</h2>
@@ -901,7 +1002,7 @@
           <div class="contact-detail"><i class="fas fa-map-marker-alt"></i> <span>remote :: UTC+2 Nairobi, Kenya.</span></div>
           <div class="social-links">
             <a href="https://github.com/tazepenguin" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/sys.taze"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/sys.taze" target="_blank"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
         <div class="term-panel">
@@ -927,13 +1028,12 @@
 
 <footer>
   <div class="container">
-    <p>© 2025 Russell — penguin labs | <span class="prompt">exit 0</span></p>
+    <p>© 2025 Russell - penguin labs | <span class="prompt">exit 0</span></p>
   </div>
 </footer>
 
 <script>
-  // ========== EMAILJS CONFIGURATION ==========
-  // Replace with your actual EmailJS credentials after signing up at emailjs.com
+  // EMAILJS CONFIGURATION 
   const EMAILJS_CONFIG = {
     PUBLIC_KEY: "1XEYlG2PQKziOplRX",
     SERVICE_ID: "service_kz204ma",
@@ -948,7 +1048,7 @@
     console.warn("EmailJS not configured. Please replace placeholder keys with your actual EmailJS credentials.");
   }
 
-  // ========== Theme toggle ==========
+  // Theme toggle 
   const toggle = document.getElementById('themeToggle');
   const currentTheme = localStorage.getItem('themeMode');
   if (currentTheme === 'light') {
@@ -969,7 +1069,7 @@
     }
   });
 
-  // ========== Smooth scroll ==========
+  //  Smooth scroll
   document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -982,7 +1082,7 @@
     });
   });
 
-  // ========== Active nav highlight ==========
+  // Active nav highlight
   const sections = document.querySelectorAll('section');
   const navItems = document.querySelectorAll('.nav-links a');
   function setActive() {
@@ -1007,7 +1107,7 @@
   window.addEventListener('scroll', setActive);
   window.addEventListener('load', setActive);
 
-  // ========== GitHub projects ==========
+  //GitHub projects
   async function fetchGitHubProjects() {
     const container = document.getElementById('projects-container');
     const username = 'tazepenguin';
@@ -1059,7 +1159,7 @@
 
   fetchGitHubProjects();
 
-  // ========== Interactive Terminal ==========
+  // Interactive Terminal 
   const termInput = document.getElementById('term-input');
   const termOutputDiv = document.getElementById('term-output');
 
@@ -1083,7 +1183,7 @@
         appendToTerminal('Available commands: about, projects, skills, contact, clear, date, whoami, echo');
         break;
       case 'about':
-        appendToTerminal('Russell — Senior Developer & Systems Architect. Passionate about terminal-first tooling, WebAssembly, and clean code.');
+        appendToTerminal('Russell — Developer, Data Analyst & Statistician. Passionate about solving modern day problems with code.');
         break;
       case 'projects':
         appendToTerminal('Fetching latest projects from GitHub...');
@@ -1093,7 +1193,7 @@
         appendToTerminal('Tech Stack: Java, R, C, Postgres, HTML5, CSS3, Bash/Zsh, Git/GitHub Actions, Python, JavaScript');
         break;
       case 'contact':
-        appendToTerminal('Contact: russell@dev.terminal | github.com/tazepenguin | @russell_dev');
+        appendToTerminal('Contact: charlesrussell981@gmail.com | github.com/tazepenguin | instagram.com/sys.taze');
         break;
       case 'clear':
         termOutputDiv.innerHTML = '';
@@ -1102,7 +1202,7 @@
         appendToTerminal(new Date().toString());
         break;
       case 'whoami':
-        appendToTerminal('taze russell');
+        appendToTerminal('taze russell - penguin labs');
         break;
       case 'echo':
         const message = args.slice(1).join(' ');
@@ -1144,7 +1244,7 @@
 
   document.querySelector('.interactive-terminal').addEventListener('click', () => termInput.focus());
 
-  // ========== Contact form with EmailJS ==========
+  // Contact form with EmailJS
   const contactForm = document.getElementById('terminalContact');
   const feedbackDiv = document.getElementById('termFeedback');
 
@@ -1199,7 +1299,7 @@
     }
   });
 
-  // ========== Profile picture modal ==========
+  // Profile picture modal 
   const profileImg = document.getElementById('profileImg');
   const modal = document.getElementById('profileModal');
   const modalImg = document.getElementById('modalImg');
@@ -1223,7 +1323,7 @@
     }
   });
 
-  // ========== Matrix Rain Animation (with theme adaptation) ==========
+  //  Matrix Rain Animation 
   const canvas = document.getElementById('matrix-canvas');
   const ctx = canvas.getContext('2d');
 
@@ -1287,8 +1387,7 @@
   initMatrix();
   drawMatrix();
 
-  // ========== Periodic Global Glitch Effect ==========
-  // Wait 3 seconds then start glitching every 3-8 seconds
+  // Periodic Global Glitch Effect
   setTimeout(() => {
     function applyGlitch() {
       document.body.classList.add('global-glitch');
@@ -1296,13 +1395,81 @@
         document.body.classList.remove('global-glitch');
       }, 150);
     }
-    // Initial glitch after delay
     applyGlitch();
-    // Then set interval with random delay between 3 and 8 seconds
-    const glitchInterval = setInterval(() => {
+    setInterval(() => {
       applyGlitch();
-    }, Math.random() * 5000 + 3000); // 3-8 seconds
+    }, Math.random() * 5000 + 3000);
   }, 3000);
+
+  // Code & Live Demo 
+  const codeSnippet = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>taze@dev:~/portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>/* terminal theme */</style>
+</head>
+<body>
+  <nav class="navbar">taze@dev:~/portfolio</nav>
+  <main>
+    <section class="hero">… ASCII art & terminal greeting …</section>
+    <section class="about">… about me …</section>
+    <section class="projects">… GitHub repos …</section>
+    <section class="skills">… tech stack …</section>
+    <section class="terminal">… interactive shell …</section>
+    <section class="contact">… contact form …</section>
+  </main>
+</body>
+</html>`;
+
+  const codeElement = document.getElementById('code-snippet');
+  if (codeElement) {
+    let escaped = codeSnippet
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    escaped = escaped.replace(/(&lt;\/?[a-z]+&gt;)/gi, '<span class="code-tag">$1</span>');
+    escaped = escaped.replace(/(&lt;[a-z]+)(\s+[a-z-]+)(=)(&quot;.*?&quot;)/gi, '$1<span class="code-attr">$2</span><span class="code-eq">$3</span><span class="code-value">$4</span>');
+    codeElement.innerHTML = escaped;
+  }
+
+  const demoOutput = document.getElementById('demo-output');
+  if (demoOutput) {
+    const demoLines = [
+      { prompt: '>', text: 'Initializing portfolio environment...' },
+      { prompt: '>', text: 'Loading taze@dev profile...' },
+      { prompt: '>', text: '> whoami' },
+      { prompt: '$', text: 'Russell — Developer, Data Analyst & Statistician' },
+      { prompt: '>', text: '> ls -l projects/' },
+      { prompt: '$', text: 'featured repos: kernel-dash, rustic-cli, v8-editor' },
+      { prompt: '>', text: '> skills' },
+      { prompt: '$', text: 'Java, R, C, Postgres, HTML5, CSS3, Bash/Zsh, Git/GitHub Actions, Python, JavaScript' },
+      { prompt: '>', text: 'Ready. Interactive shell available.' },
+    ];
+    let lineIndex = 0;
+    function typeLine() {
+      if (lineIndex >= demoLines.length) {
+        setTimeout(() => {
+          demoOutput.innerHTML = '';
+          lineIndex = 0;
+          typeLine();
+        }, 5000);
+        return;
+      }
+      const line = demoLines[lineIndex];
+      const div = document.createElement('div');
+      div.className = 'demo-line';
+      div.innerHTML = `<span class="prompt">${line.prompt}</span> ${line.text}<span class="typing-cursor"></span>`;
+      demoOutput.appendChild(div);
+      setTimeout(() => {
+        if (div.lastChild) div.lastChild.remove();
+      }, 800);
+      lineIndex++;
+      setTimeout(typeLine, 1200);
+    }
+    typeLine();
+  }
 </script>
 </body>
 </html>
