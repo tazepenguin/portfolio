@@ -964,11 +964,12 @@
   const termInput = document.getElementById('term-input'), termOutputDiv = document.getElementById('term-output');
   function appendTerm(text, isError = false) { const line = document.createElement('div'); line.className = 'term-output-line'; line.style.color = isError ? '#e67e22' : 'var(--text-primary)'; line.innerHTML = text; termOutputDiv.appendChild(line); termOutputDiv.scrollTop = termOutputDiv.scrollHeight; }
   async function processCommand(cmd) { const raw = cmd.trim(); if(!raw) return; appendTerm(`<span style="color: var(--accent);">$</span> ${escapeHtml(raw)}`); const parts = raw.toLowerCase().split(/\s+/); const main = parts[0];
-    if(main === 'help') appendTerm('Available: about, projects, skills, contact, clear, date, whoami, echo &lt;msg&gt;');
+    if(main === 'help') appendTerm('Available: about, projects, skills, joke, contact, clear, date, whoami, echo &lt;msg&gt;');
     else if(main === 'about') appendTerm('Russell — Developer, Data Analyst & Statistician. Passionate problem solver. A person who can literally make it rain matrices, on screen though.');
     else if(main === 'projects') { appendTerm('Fetching repos...'); try { const res = await fetch('https://api.github.com/users/tazepenguin/repos?sort=stars&per_page=5'); if(!res.ok) throw new Error(); const repos = await res.json(); const top = repos.filter(r=>!r.fork).slice(0,3); if(top.length) { appendTerm('Top projects:'); top.forEach(r=>appendTerm(`  • ${escapeHtml(r.name)} — ${escapeHtml(r.description || 'no desc')} (★ ${r.stargazers_count})<br>    → ${escapeHtml(r.html_url)}`)); } else appendTerm('No repos found.'); } catch(e) { appendTerm('GitHub API error.', true); } }
     else if(main === 'skills') appendTerm('Java · R · C · Postgres · HTML5 · CSS3 · Bash · Git · Python · JavaScript');
-    else if(main === 'contact') appendTerm('Email: charlesrussell981@gmail.com | GitHub: tazepenguin | IG: sys.taze');
+    else if(main === 'joke') appendTerm('Upgrade to premium first, I am not a comedian on free tier!');
+    else if(main === 'contact') appendTerm('Email: charlesrussell981@gmail.com | GitHub: tazepenguin | IG: sys.taze | Whatsapp: +254 743 375 966');
     else if(main === 'clear') termOutputDiv.innerHTML = '';
     else if(main === 'date') appendTerm(new Date().toString());
     else if(main === 'whoami') appendTerm('taze russell @ penguin labs');
